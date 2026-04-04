@@ -14,13 +14,13 @@
   --teal-glow:rgba(62,188,181,0.1);
   --teal-line:rgba(62,188,181,0.2);
   --teal-mid:rgba(62,188,181,0.35);
-  --dark:#07100f;
-  --dark2:#0b1514;
-  --dark3:#0f1a19;
+  --dark:#0e1f1e;
+  --dark2:#111f1e;
+  --dark3:#162322;
   --cream:#f0ede6;
-  --text:rgba(240,237,230,0.88);
-  --muted:rgba(240,237,230,0.5);
-  --dim:rgba(240,237,230,0.25);
+  --text:rgba(240,237,230,0.95);
+  --muted:rgba(240,237,230,0.68);
+  --dim:rgba(240,237,230,0.45);
 }
 html{scroll-behavior:smooth}
 body{font-family:'Jost',sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
@@ -34,7 +34,7 @@ nav{
   border-bottom:1px solid transparent;
 }
 nav.scrolled{background:rgba(7,16,15,0.97);border-color:var(--teal-line);backdrop-filter:blur(16px)}
-.nav-logo img{height:54px;width:auto}
+.nav-logo img{height:68px;width:auto}
 .nav-links{display:flex;gap:52px;list-style:none}
 .nav-links a{
   font-size:.68rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;
@@ -59,9 +59,9 @@ nav.scrolled{background:rgba(7,16,15,0.97);border-color:var(--teal-line);backdro
 .hero-bg{
   position:absolute;inset:0;
   background:
-    radial-gradient(ellipse 60% 60% at 75% 40%,rgba(62,188,181,0.07) 0%,transparent 65%),
-    radial-gradient(ellipse 40% 50% at 20% 70%,rgba(62,188,181,0.04) 0%,transparent 60%),
-    linear-gradient(160deg,#07100f 0%,#0b1514 60%,#07100f 100%);
+    radial-gradient(ellipse 60% 60% at 75% 40%,rgba(62,188,181,0.10) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 50% at 20% 70%,rgba(62,188,181,0.06) 0%,transparent 60%),
+    linear-gradient(160deg,#0e1f1e 0%,#111f1e 60%,#0e1f1e 100%);
 }
 .hero-grid{
   position:absolute;inset:0;opacity:.045;
@@ -89,8 +89,8 @@ h1{
 }
 h1 em{font-style:italic;color:var(--teal)}
 .hero-desc{
-  font-size:.95rem;font-weight:200;line-height:2.1;
-  color:var(--muted);max-width:460px;margin-bottom:60px;
+  font-size:1.05rem;font-weight:300;line-height:2.2;
+  color:var(--muted);max-width:480px;margin-bottom:60px;
   animation:fadeUp 1s .4s both;
 }
 .hero-btns{display:flex;gap:24px;align-items:center;animation:fadeUp 1s .55s both}
@@ -168,13 +168,13 @@ h2.s-title em{font-style:italic;color:var(--teal)}
 #vision{padding:140px 80px;background:var(--dark)}
 .vision-wrap{display:grid;grid-template-columns:1fr 1fr;gap:110px;align-items:start}
 .vision-left .s-eyebrow{justify-content:flex-start}
-.vision-left p{font-size:.9rem;font-weight:200;line-height:2.2;color:var(--muted);margin-bottom:22px}
+.vision-left p{font-size:1rem;font-weight:300;line-height:2.3;color:var(--muted);margin-bottom:24px}
 .vision-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--teal-line);margin-top:52px}
 .pillar{background:var(--dark);padding:30px 26px;transition:background .3s}
 .pillar:hover{background:rgba(62,188,181,0.04)}
 .pillar-num{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--teal-line);margin-bottom:12px}
 .pillar h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--teal);margin-bottom:10px}
-.pillar p{font-size:.8rem;font-weight:200;line-height:1.9;color:var(--muted);margin:0}
+.pillar p{font-size:.88rem;font-weight:300;line-height:2;color:var(--muted);margin:0}
 
 /* vision right — vertical timeline */
 .vision-right{padding-top:8px}
@@ -197,7 +197,7 @@ h2.s-title em{font-style:italic;color:var(--teal)}
   font-size:1.15rem;font-weight:400;
   color:var(--cream);margin-bottom:10px;
 }
-.t-content p{font-size:.82rem;font-weight:200;line-height:1.95;color:var(--muted)}
+.t-content p{font-size:.92rem;font-weight:300;line-height:2.1;color:var(--muted)}
 
 /* ── SERVICES ── */
 #servicios{padding:140px 80px;background:var(--dark2)}
@@ -219,9 +219,9 @@ h2.s-title em{font-style:italic;color:var(--teal)}
 }
 .s-card:hover .s-num{color:rgba(62,188,181,0.14)}
 .s-card h3{font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:400;color:var(--cream);margin-bottom:18px}
-.s-card p{font-size:.85rem;font-weight:200;line-height:2.1;color:var(--muted);margin-bottom:28px}
+.s-card p{font-size:.95rem;font-weight:300;line-height:2.2;color:var(--muted);margin-bottom:28px}
 .s-card ul{list-style:none;display:flex;flex-direction:column;gap:12px}
-.s-card li{font-size:.78rem;font-weight:300;color:var(--dim);padding-left:20px;position:relative;line-height:1.7}
+.s-card li{font-size:.86rem;font-weight:300;color:var(--muted);padding-left:20px;position:relative;line-height:1.8}
 .s-card li::before{content:'—';position:absolute;left:0;color:var(--teal)}
 
 /* ── PATRIMONY ── */
@@ -246,9 +246,9 @@ h2.s-title em{font-style:italic;color:var(--teal)}
 }
 .p-card:hover .p-icon{border-color:var(--teal);background:var(--teal-glow)}
 .p-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--teal);margin-bottom:16px}
-.p-card p{font-size:.85rem;font-weight:200;line-height:2.1;color:var(--muted);margin-bottom:20px}
+.p-card p{font-size:.95rem;font-weight:300;line-height:2.2;color:var(--muted);margin-bottom:20px}
 .p-card ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:4px}
-.p-card li{font-size:.78rem;font-weight:300;color:var(--dim);padding-left:20px;position:relative;line-height:1.7}
+.p-card li{font-size:.86rem;font-weight:300;color:var(--muted);padding-left:20px;position:relative;line-height:1.8}
 .p-card li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:.7rem}
 
 /* ── CTA ── */
@@ -297,7 +297,7 @@ footer{
   display:flex;align-items:center;justify-content:space-between;
   border-top:1px solid var(--teal-line);
 }
-.f-logo img{height:40px;width:auto;opacity:.55}
+.f-logo img{height:52px;width:auto;opacity:.7}
 .f-copy{font-size:.65rem;font-weight:200;color:var(--dim);letter-spacing:.1em}
 .f-top{font-size:.62rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:opacity .3s}
 .f-top:hover{opacity:.6}
@@ -564,7 +564,7 @@ footer{
   </div>
   <div class="cta-right">
     <a href="#contacto" class="btn-fill">Agendar una Reunión</a>
-    <a href="mailto:info@bullhaus.com.ar" class="btn-ghost">info@bullhaus.com.ar <span class="arr">→</span></a>
+    <a href="/cdn-cgi/l/email-protection#cca5a2aaa38caeb9a0a0a4adb9bfe2afa3a1e2adbe" class="btn-ghost"><span class="__cf_email__" data-cfemail="375e5951587755425b5b5f5642441954585a195645">[email&#160;protected]</span> <span class="arr">→</span></a>
   </div>
 </section>
 
@@ -575,7 +575,7 @@ footer{
     <div class="c-items">
       <div class="c-item">
         <span>Email</span>
-        <a href="mailto:info@bullhaus.com.ar">info@bullhaus.com.ar</a>
+        <a href="/cdn-cgi/l/email-protection#422b2c242d0220372e2e2a2337316c212d2f6c2330"><span class="__cf_email__" data-cfemail="7e171018113e1c0b1212161f0b0d501d1113501f0c">[email&#160;protected]</span></a>
       </div>
       <div class="c-item">
         <span>Teléfono</span>
@@ -607,21 +607,7 @@ footer{
   <a href="#hero" class="f-top">↑ Volver al inicio</a>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Nav scroll
 const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
-
-// Intersection observer for reveals
-const io=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{
-    if(e.isIntersecting){
-      setTimeout(()=>e.target.classList.add('on'),i*90);
-      io.unobserve(e.target);
-    }
-  });
-},{threshold:.07});
-document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el=>io.observe(el));
-</script>
-</body>
-</html>
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{p
