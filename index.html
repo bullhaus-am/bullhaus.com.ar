@@ -174,6 +174,17 @@ h1 em{font-style:italic;color:var(--teal)}
   line-height:1;pointer-events:none;user-select:none;z-index:1;
 }
 
+/* hero signature — curva de equity que se dibuja sola */
+.hero-chart{
+  position:absolute;inset:0;width:100%;height:100%;
+  z-index:1;pointer-events:none;
+}
+#heroArea{opacity:0;animation:chartFade 2.2s 1.8s both}
+#heroDot{opacity:0;animation:dotIn .6s 3.5s both,dotPulse 3.2s 4.2s ease-in-out infinite}
+@keyframes chartFade{to{opacity:1}}
+@keyframes dotIn{to{opacity:1}}
+@keyframes dotPulse{50%{opacity:.35}}
+
 /* ── DIVIDER ── */
 .divider{height:1px;background:linear-gradient(to right,transparent,var(--teal-line),transparent)}
 
@@ -356,16 +367,27 @@ footer{
 .f-top:hover{opacity:.6}
 
 /* ── REVEAL ── */
-.reveal{opacity:1;transform:none}
-.reveal.on{opacity:1;transform:none}
-.reveal-l{opacity:1;transform:none}
-.reveal-l.on{opacity:1;transform:none}
-.reveal-r{opacity:1;transform:none}
-.reveal-r.on{opacity:1;transform:none}
+/* Estados ocultos SOLO bajo html.js (sin JS el contenido queda visible desde el HTML) */
+.js .reveal{opacity:0;transform:translateY(34px)}
+.js .reveal-l{opacity:0;transform:translateX(-34px)}
+.js .reveal-r{opacity:0;transform:translateX(34px)}
+.js .reveal,.js .reveal-l,.js .reveal-r{
+  transition:opacity .95s cubic-bezier(.22,1,.36,1),transform .95s cubic-bezier(.22,1,.36,1);
+  will-change:opacity,transform;
+}
+.js .reveal.on,.js .reveal-l.on,.js .reveal-r.on{opacity:1;transform:none}
 
 /* ── KEYFRAMES ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
 @keyframes fadeLeft{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:none}}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal,.js .reveal-l,.js .reveal-r{opacity:1;transform:none;transition:none}
+  .hero-tag,h1,.hero-desc,.hero-btns,.h-card{animation:none}
+  #heroArea,#heroDot{animation:none;opacity:1}
+}
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px){
@@ -390,6 +412,7 @@ footer{
   .hero-left{padding:130px 32px 70px}
   .hero-right{display:none}
   .deco-b{display:none}
+  .hero-chart{opacity:.45}
   #vision{padding:90px 32px}
   .vision-wrap{grid-template-columns:1fr;gap:60px}
   #servicios{padding:90px 32px}
@@ -427,6 +450,24 @@ footer{
   <div class="hero-bg"></div>
   <div class="hero-grid"></div>
   <div class="deco-b">B</div>
+  <svg class="hero-chart" viewBox="0 0 1440 800" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#3ebcb5" stop-opacity=".07"/>
+        <stop offset="100%" stop-color="#3ebcb5" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#3ebcb5" stop-opacity="0"/>
+        <stop offset="20%" stop-color="#3ebcb5" stop-opacity=".30"/>
+        <stop offset="100%" stop-color="#3ebcb5" stop-opacity=".55"/>
+      </linearGradient>
+    </defs>
+    <path id="heroArea" fill="url(#chartFill)" d="M0,648 C90,600 150,632 230,588 C310,544 360,566 440,528 C520,490 560,512 640,470 C700,438 740,468 800,430 C880,382 920,410 1000,352 C1060,310 1100,338 1170,290 C1240,242 1310,258 1386,196 C1404,182 1424,178 1448,168 L1448,800 L0,800 Z"/>
+    <!-- Sin vector-effect: en Safari non-scaling-stroke calcula los dashes en px de
+         pantalla y el dibujado por dashoffset queda corto en viewports anchos -->
+    <path id="heroLine" fill="none" stroke="url(#chartStroke)" stroke-width="1.3" d="M0,648 C90,600 150,632 230,588 C310,544 360,566 440,528 C520,490 560,512 640,470 C700,438 740,468 800,430 C880,382 920,410 1000,352 C1060,310 1100,338 1170,290 C1240,242 1310,258 1386,196 C1404,182 1424,178 1448,168"/>
+    <circle id="heroDot" cx="1386" cy="196" r="4" fill="#3ebcb5"/>
+  </svg>
 
   <div class="hero-left">
     <p class="hero-tag">Bullhaus Asset Management</p>
@@ -440,12 +481,12 @@ footer{
 
   <div class="hero-right">
     <div class="h-card">
-      <span class="h-card-val">15+</span>
+      <span class="h-card-val" data-count="15" data-suffix="+">15+</span>
       <div class="h-card-lbl">Años de experiencia</div>
       <div class="h-card-desc">Trayectoria sólida en wealth management para familias e individuos de alto patrimonio.</div>
     </div>
     <div class="h-card">
-      <span class="h-card-val">100%</span>
+      <span class="h-card-val" data-count="100" data-suffix="%">100%</span>
       <div class="h-card-lbl">Client-First</div>
       <div class="h-card-desc">Cada decisión está alineada exclusivamente con los intereses y objetivos de nuestros clientes.</div>
     </div>
@@ -722,6 +763,11 @@ footer{
 </footer>
 
 <script>
+// Marca html.js: los estados ocultos de .reveal solo aplican si el JS corrió
+// y el browser soporta IntersectionObserver (si no, todo queda visible)
+if('IntersectionObserver' in window)document.documentElement.classList.add('js');
+const REDUCED_MOTION=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // Nav scroll
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
@@ -750,6 +796,55 @@ if('IntersectionObserver' in window){
   },{threshold:0.12});
   revealEls.forEach(el=>io.observe(el));
 }
+
+/* ── Hero: la curva se dibuja sola y la pelota viaja con la punta ── */
+const heroLine=document.getElementById('heroLine');
+const heroDot=document.getElementById('heroDot');
+if(heroLine&&heroDot&&!REDUCED_MOTION&&heroLine.getTotalLength){
+  const len=heroLine.getTotalLength();
+  // Recorrido de la pelota: mismo trazado sin el tramo final
+  // (la línea sigue hasta el borde; la pelota descansa en su cx/cy del HTML)
+  const probe=document.createElementNS('http://www.w3.org/2000/svg','path');
+  probe.setAttribute('d',heroLine.getAttribute('d').replace(/ C1404,182.*$/,''));
+  heroLine.ownerSVGElement.appendChild(probe);
+  const dotLen=probe.getTotalLength();
+  probe.remove();
+  heroLine.style.strokeDasharray=len;
+  heroLine.style.strokeDashoffset=len;
+  heroDot.style.animation='none';heroDot.style.opacity='0';
+  const DELAY=500,DUR=3200,t0=performance.now()+DELAY;
+  const step=(now)=>{
+    if(now<t0){requestAnimationFrame(step);return;}
+    const p=Math.min((now-t0)/DUR,1);
+    const e=1-Math.pow(1-p,4); // easeOutQuart
+    heroLine.style.strokeDashoffset=String(len*(1-e));
+    const pt=heroLine.getPointAtLength(Math.min(len*e,dotLen));
+    heroDot.setAttribute('cx',pt.x);heroDot.setAttribute('cy',pt.y);
+    heroDot.style.opacity='1';
+    if(p<1){requestAnimationFrame(step);return;}
+    // Estado final garantizado: línea completa, pelota en reposo pulsando
+    heroLine.style.strokeDasharray='none';heroLine.style.strokeDashoffset='0';
+    heroDot.style.animation='dotPulse 3.2s ease-in-out .6s infinite';
+  };
+  requestAnimationFrame(step);
+}
+
+/* ── Hero: contadores de las stat cards (15+, 100%) ── */
+document.querySelectorAll('.h-card-val[data-count]').forEach((el,i)=>{
+  if(REDUCED_MOTION)return; // deja el valor final del HTML
+  const end=parseInt(el.dataset.count,10),suf=el.dataset.suffix||'';
+  if(isNaN(end))return;
+  el.textContent='0'+suf;
+  const start=performance.now()+500+i*150,dur=1800;
+  const step=(now)=>{
+    if(now<start){requestAnimationFrame(step);return;}
+    const p=Math.min((now-start)/dur,1);
+    const eased=1-Math.pow(1-p,4); // easeOutQuart
+    el.textContent=Math.round(end*eased)+suf;
+    if(p<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+});
 
 /* ── Contact form ──
    Para activar el envío real: cree un formulario gratuito en https://formspree.io
