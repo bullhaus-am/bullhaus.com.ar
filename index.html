@@ -61,6 +61,7 @@ nav.scrolled{background:rgba(7,16,15,0.97);border-color:var(--teal-line);backdro
 .nav-links a{
   font-size:.68rem;font-weight:400;letter-spacing:.26em;text-transform:uppercase;
   color:var(--muted);text-decoration:none;transition:color .3s;position:relative;
+  white-space:nowrap;
 }
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--teal);transition:width .4s cubic-bezier(.22,1,.36,1)}
 .nav-links a:hover{color:var(--teal)}
@@ -69,6 +70,7 @@ nav.scrolled{background:rgba(7,16,15,0.97);border-color:var(--teal-line);backdro
   font-size:.65rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
   padding:11px 32px;border:1px solid var(--teal-line);color:var(--teal);
   text-decoration:none;transition:background .3s,border-color .3s;
+  white-space:nowrap;
 }
 .nav-cta:hover{background:var(--teal-glow);border-color:var(--teal)}
 .nav-menu{display:flex;align-items:center;gap:48px}
@@ -266,6 +268,52 @@ h2.s-title em{font-style:italic;color:var(--teal)}
 .s-card li{font-size:.86rem;font-weight:300;color:var(--muted);padding-left:20px;position:relative;line-height:1.8}
 .s-card li::before{content:'—';position:absolute;left:0;color:var(--teal)}
 
+/* ── MODELO ── */
+#modelo{padding:140px 80px;background:var(--dark3);position:relative;overflow:hidden}
+#modelo::before{
+  content:'';position:absolute;top:120px;left:50%;transform:translateX(-50%);
+  width:960px;height:560px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(62,188,181,0.08),transparent 72%);
+  pointer-events:none;
+}
+#modelo .s-head{position:relative;z-index:1}
+.modelo-frame{
+  position:relative;z-index:1;max-width:1060px;margin:0 auto 80px;
+  border:1px solid var(--teal-line);border-radius:10px;
+  background:var(--dark);overflow:hidden;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,0.65),0 0 60px -20px var(--teal-glow);
+}
+.modelo-bar{
+  display:flex;align-items:center;gap:7px;
+  padding:13px 18px;border-bottom:1px solid var(--teal-line);
+  background:var(--dark2);
+}
+.modelo-bar span{width:9px;height:9px;border-radius:50%;border:1px solid var(--teal-mid)}
+.modelo-bar em{
+  font-style:normal;font-size:.58rem;font-weight:400;letter-spacing:.26em;
+  text-transform:uppercase;color:var(--dim);margin-left:12px;
+}
+.modelo-frame img{display:block;width:100%;height:auto}
+.modelo-grid{
+  position:relative;z-index:1;max-width:1060px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--teal-line);
+}
+.m-card{background:var(--dark3);padding:44px 38px;transition:background .3s}
+.m-card:hover{background:rgba(62,188,181,0.04)}
+.m-num{
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;
+  color:var(--teal-mid);margin-bottom:16px;transition:color .3s;
+}
+.m-card:hover .m-num{color:var(--teal)}
+.m-card h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:400;color:var(--cream);margin-bottom:14px}
+.m-card p{font-size:.9rem;font-weight:300;line-height:2.1;color:var(--muted)}
+.m-card p em{font-style:normal;color:var(--teal)}
+.modelo-note{
+  position:relative;z-index:1;max-width:1060px;margin:56px auto 0;
+  text-align:center;font-size:.72rem;font-weight:200;letter-spacing:.08em;
+  color:var(--muted);
+}
+
 /* ── PATRIMONY ── */
 #patrimonio{padding:140px 80px;background:var(--dark)}
 .pat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--teal-line)}
@@ -390,6 +438,13 @@ footer{
 }
 
 /* ── RESPONSIVE ── */
+/* Franja intermedia: con 5 links el nav desktop necesita ~1215px a gap completo;
+   se compacta para no envolver en laptops chicas / tablets apaisadas */
+@media(min-width:1025px) and (max-width:1260px){
+  nav{padding:0 32px}
+  .nav-links{gap:28px}
+  .nav-menu{gap:28px}
+}
 @media(max-width:1024px){
   nav{padding:0 32px}
   .nav-toggle{display:flex}
@@ -417,6 +472,10 @@ footer{
   .vision-wrap{grid-template-columns:1fr;gap:60px}
   #servicios{padding:90px 32px}
   .services-grid{grid-template-columns:1fr}
+  #modelo{padding:90px 32px}
+  .modelo-frame{margin-bottom:56px}
+  .modelo-grid{grid-template-columns:1fr}
+  .modelo-note{margin-top:40px}
   #patrimonio{padding:90px 32px}
   .pat-grid{grid-template-columns:1fr}
   #cta{padding:70px 32px;grid-template-columns:1fr}
@@ -438,6 +497,7 @@ footer{
     <ul class="nav-links">
       <li><a href="#vision">Nuestra Visión</a></li>
       <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#modelo">El Modelo</a></li>
       <li><a href="#patrimonio">Patrimonio</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -616,6 +676,42 @@ footer{
 
 <div class="divider"></div>
 
+<!-- MODELO -->
+<section id="modelo">
+  <div class="s-head reveal">
+    <p class="s-eyebrow center">Análisis Cuantitativo</p>
+    <h2 class="s-title">Un modelo propietario que <em>lee</em> el mercado</h2>
+    <p class="s-sub center">Complementamos el criterio de nuestro equipo con un sistema cuantitativo de desarrollo propio, que monitorea a diario la liquidez global y la salud interna del mercado para orientar cada decisión de inversión.</p>
+  </div>
+
+  <div class="modelo-frame reveal">
+    <div class="modelo-bar" aria-hidden="true"><span></span><span></span><span></span><em>Bullhaus AM · Dashboard Interno</em></div>
+    <img src="assets/model-dashboard.webp" width="2100" height="1589" loading="lazy" alt="Dashboard interno de Bullhaus: score de salud del mercado, régimen vigente y evolución reciente de los seis pilares del modelo"/>
+  </div>
+
+  <div class="modelo-grid reveal">
+    <div class="m-card">
+      <div class="m-num" aria-hidden="true">01</div>
+      <h3>Liquidez y Salud Interna</h3>
+      <p>El modelo procesa decenas de series globales — liquidez de bancos centrales, spreads de crédito, volatilidad, flujos de capital y amplitud del mercado — para medir el verdadero pulso del ciclo.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-num" aria-hidden="true">02</div>
+      <h3>Seis Pilares, una Señal</h3>
+      <p>Seis pilares independientes se sintetizan en un score único que define el régimen vigente: <em>Risk On</em>, <em>Neutral</em> o <em>Risk Off</em>. Una lectura objetiva del mercado, actualizada cada día.</p>
+    </div>
+    <div class="m-card">
+      <div class="m-num" aria-hidden="true">03</div>
+      <h3>Del Dato a la Decisión</h3>
+      <p>La señal orienta el posicionamiento táctico de los portafolios: cuánto riesgo asumir y cuándo priorizar la protección del capital. El modelo disciplina nuestras decisiones; el criterio profesional las conduce.</p>
+    </div>
+  </div>
+
+  <p class="modelo-note">La metodología del modelo es un desarrollo propio de Bullhaus Asset Management y se mantiene confidencial. La imagen se muestra a modo ilustrativo y no constituye una recomendación de inversión.</p>
+</section>
+
+<div class="divider"></div>
+
 <!-- PATRIMONY -->
 <section id="patrimonio">
   <div class="s-head reveal">
@@ -763,9 +859,6 @@ footer{
 </footer>
 
 <script>
-// Marca html.js: los estados ocultos de .reveal solo aplican si el JS corrió
-// y el browser soporta IntersectionObserver (si no, todo queda visible)
-if('IntersectionObserver' in window)document.documentElement.classList.add('js');
 const REDUCED_MOTION=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Nav scroll
@@ -785,12 +878,19 @@ if(navToggle&&navMenu){
   navMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
   document.addEventListener('keydown',e=>{ if(e.key==='Escape')setMenu(false); });
   // Cierra el panel si se agranda a desktop
-  window.matchMedia('(min-width:1025px)').addEventListener('change',e=>{ if(e.matches)setMenu(false); });
+  // (addListener como fallback: Safari <14 / Edge Legacy no tienen addEventListener en MediaQueryList)
+  const mqDesktop=window.matchMedia('(min-width:1025px)');
+  const closeOnDesktop=e=>{ if(e.matches)setMenu(false); };
+  if(mqDesktop.addEventListener)mqDesktop.addEventListener('change',closeOnDesktop);
+  else if(mqDesktop.addListener)mqDesktop.addListener(closeOnDesktop);
 }
 
 /* ── Reveal on scroll (mejora progresiva: si falla, el contenido ya es visible) ── */
+// Marca html.js recién acá — si algo más arriba tiró error, los .reveal quedan visibles.
+// Los estados ocultos de .reveal solo aplican bajo html.js + IntersectionObserver.
 const revealEls=document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
 if('IntersectionObserver' in window){
+  document.documentElement.classList.add('js');
   const io=new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
   },{threshold:0.12});
